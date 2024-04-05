@@ -17,7 +17,7 @@ export function AttendeeList() {
             </div>
             <Table>
                 <thead>
-                    <TableRow >
+                    <TableRow>
                         <TableHeader style={{width:38}}>
                             <input type="checkbox"  className="size-4 bg-black/20 rounded border-white/10 "/>
                         </TableHeader>
@@ -31,7 +31,7 @@ export function AttendeeList() {
                 <tbody>
                     {Array.from({length: 8}).map((_,i)=>{
                         return(
-                            <TableRow key={i}>
+                            <TableRow className="hover:bg-white/10" key={i}>
                             <TableCell>
                                 <input type="checkbox"  className="size-4 bg-black/20 rounded border-white/10"/>
                             </TableCell>
@@ -54,7 +54,7 @@ export function AttendeeList() {
                     })}
                 </tbody>
                 <tfoot>
-                    <tr>
+                    <TableRow>
                         <TableCell colSpan={3}>
                             Mostrando 10 de 228 itens
                         </TableCell>
@@ -70,7 +70,7 @@ export function AttendeeList() {
                             </div>
 
                         </TableCell>
-                    </tr>
+                    </TableRow>
                 </tfoot>
             </Table>
         </div>
