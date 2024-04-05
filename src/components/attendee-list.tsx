@@ -3,7 +3,7 @@ import { IconButton } from "./icon-button"
 import { Table } from "./table"
 import { TableHeader } from "./table-header"
 import { TableCell } from "./table-cell"
-
+import { TableRow } from './table-row'
 export function AttendeeList() {
     return (
         <div className=" flex flex-col gap-4">
@@ -17,7 +17,7 @@ export function AttendeeList() {
             </div>
             <Table>
                 <thead>
-                    <tr className="border-b border-white/10">
+                    <TableRow >
                         <TableHeader style={{width:38}}>
                             <input type="checkbox"  className="size-4 bg-black/20 rounded border-white/10 "/>
                         </TableHeader>
@@ -26,12 +26,12 @@ export function AttendeeList() {
                         <TableHeader>Data da inscrição</TableHeader>
                         <TableHeader>Data do check-in</TableHeader>
                         <th style={{width:64}} className="py-3 px-4 text-sm font-semibold text-left "></th>
-                    </tr>
+                    </TableRow>
                 </thead>
                 <tbody>
                     {Array.from({length: 8}).map((_,i)=>{
                         return(
-                            <tr key={i} className="border-b border-white/10 hover:bg-white/5">
+                            <TableRow key={i}>
                             <TableCell>
                                 <input type="checkbox"  className="size-4 bg-black/20 rounded border-white/10"/>
                             </TableCell>
@@ -49,16 +49,16 @@ export function AttendeeList() {
                             <TableCell>
                                 <IconButton transparent><MoreHorizontal className="size-4"/></IconButton>
                             </TableCell>
-                        </tr>
+                        </TableRow>
                         )
                     })}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td className="py-3 px-4 text-sm text-zinc-300" colSpan={3}>
+                        <TableCell colSpan={3}>
                             Mostrando 10 de 228 itens
-                        </td>
-                        <td className="py-3 px-4 text-sm text-zinc-300 text-right" colSpan={3}>
+                        </TableCell>
+                        <TableCell className="text-right" colSpan={3}>
                             <div className="inline-flex items-center gap-8 ">
                                 <span>Página 1 de 23</span>  
                                 <div className="flex gap-1.5">
@@ -69,7 +69,7 @@ export function AttendeeList() {
                                 </div>
                             </div>
 
-                        </td>
+                        </TableCell>
                     </tr>
                 </tfoot>
             </Table>
