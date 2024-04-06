@@ -23,6 +23,12 @@ export function AttendeeList() {
         setsearch(event.target.value);
     }
 
+    function goToNextPage() {
+        page < Math.ceil(attendees.length/10) && setPage(page+1);
+    }
+    function goToPreviousPage(){
+        page > 1 && setPage(page-1)
+    }
     return (
         <div className=" flex flex-col gap-4">
             <div className="flex gap-3 items-center">
@@ -72,15 +78,15 @@ export function AttendeeList() {
                 <tfoot>
                     <TableRow>
                         <TableCell colSpan={3}>
-                            Mostrando 10 de 228 itens
+                            Mostrando {page * 10} de {attendees.length} itens
                         </TableCell>
                         <TableCell className="text-right" colSpan={3}>
                             <div className="inline-flex items-center gap-8 ">
-                                <span>Página 1 de 23</span>  
+                                <span>Página {page} de {Math.ceil(attendees.length/10)}</span>  
                                 <div className="flex gap-1.5">
                                     <IconButton><ChevronsLeft className="size-4"/></IconButton>
-                                    <IconButton><ChevronLeft className="size-4"/></IconButton>
-                                    <IconButton><ChevronRight className="size-4"/></IconButton>
+                                    <IconButton onClick={goToPreviousPage}><ChevronLeft className="size-4"/></IconButton>
+                                    <IconButton onClick={goToNextPage}><ChevronRight className="size-4"/></IconButton>
                                     <IconButton><ChevronsRight className="size-4"/></IconButton>
                                 </div>
                             </div>
