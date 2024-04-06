@@ -27,8 +27,9 @@ export function AttendeeList() {
     const [page, setPage] = useState(1);
     const [attendees, setAttendees] = useState<Attendee[]>([]);
     const [totalAttendee, setTotalAttendee ] = useState(0);
+
     useEffect(()=>{
-        fetch('http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees')
+        fetch(`http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees?pageIndex=${page-1}`)
         .then(response => response.json())
         .then(data => {
            setAttendees(data.attendees);
@@ -41,18 +42,13 @@ export function AttendeeList() {
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
         setsearch(event.target.value);
     }
-    function goToNextPage() {
-        page < totalPage && setPage(page+1);
-    }
-    function goToPreviousPage(){
-        page > 1 && setPage(page-1)
-    }
-    function goToFirstPage(){
-        setPage(1)
-    }
-    function goToLastPage(){
-        setPage(totalPage)
-    }
+    
+    function goToNextPage() {page < totalPage && setPage(page+1)}
+    function goToPreviousPage(){page > 1 && setPage(page-1)}
+    function goToFirstPage(){setPage(1)}
+    function goToLastPage(){setPage(totalPage)}
+
+
     return (
         <div className=" flex flex-col gap-4">
             <div className="flex gap-3 items-center">
@@ -106,7 +102,7 @@ export function AttendeeList() {
                 <tfoot>
                     <TableRow>
                         <TableCell colSpan={3}>
-                            Mostrando {page * 10} de {totalAttendee} itens
+                            Mostrados {page * 10 > totalAttendee ? totalAttendee : page * 10 } de {totalAttendee} itens
                         </TableCell>
                         <TableCell className="text-right" colSpan={3}>
                             <div className="inline-flex items-center gap-8 ">
