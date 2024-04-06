@@ -1,14 +1,23 @@
-import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from "lucide-react"
 import { IconButton } from "./icon-button"
 import { Table } from "./table"
 import { TableHeader } from "./table-header"
 import { TableCell } from "./table-cell"
 import { TableRow } from './table-row'
 import { ChangeEvent, useState } from "react"
+import { attendees } from "../data/attendeees"
+import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from "lucide-react"
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/pt-br'
+
+
+dayjs.extend(relativeTime);
+dayjs.locale('pt-br')
 
 export function AttendeeList() {
 
     const [search, setsearch] = useState('');
+    const [page, setPage] = useState(1);
 
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
         setsearch(event.target.value);
@@ -38,23 +47,21 @@ export function AttendeeList() {
                     </TableRow>
                 </thead>
                 <tbody>
-                    {Array.from({length: 8}).map((_,i)=>{
+                    {attendees.slice((page-1) * 10, page * 10).map((attendee)=>{
                         return(
-                            <TableRow className="hover:bg-white/10" key={i}>
+                            <TableRow className="hover:bg-white/10" key={attendee.id}>
                                 <TableCell>
                                     <input type="checkbox"  className="size-4 bg-black/20 rounded border-white/10"/>
                                 </TableCell>
-                                <TableCell>
-                                    12383
-                                </TableCell>
+                                <TableCell>{attendee.id}</TableCell>
                                 <TableCell>
                                     <div className="flex flex-col gap-1">
-                                        <span className="font-semibold text-white">Duds Ricarte</span>
-                                        <span>lsuircarite@cccufcgedbbr</span>
+                                        <span className="font-semibold text-white">{attendee.name}</span>
+                                        <span>{attendee.email}</span>
                                     </div>
                                 </TableCell>
-                                <TableCell>7 dias atrás</TableCell>
-                                <TableCell>3 dias atrás</TableCell>
+                                <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
+                                <TableCell>{dayjs().to(attendee.checkedInAt)}</TableCell>
                                 <TableCell>
                                     <IconButton transparent><MoreHorizontal className="size-4"/></IconButton>
                                 </TableCell>
