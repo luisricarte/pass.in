@@ -23,7 +23,14 @@ interface Attendee {
 
 export function AttendeeList() {
 
-    const [search, setsearch] = useState('');
+    const [search, setSearch] = useState(()=>{
+        const url = new URL(window.location.toString())
+
+        if ( url.searchParams.has('search')){
+            return String(url.searchParams.get('search'))
+        }
+        return ''
+    });
     const [page, setPage] = useState(()=>{
         const url = new URL(window.location.toString())
 
@@ -49,11 +56,18 @@ export function AttendeeList() {
         })
     },[page, search])
 
+    function setCurrentSearch(search:string) {
+        const url = new URL(window.location.toString());
+        url.searchParams.set('search', search);
+        window.history.pushState({},"",url);
+        setSearch(search);
+    }
+
     let totalPage = Math.ceil(totalAttendee/10);
 
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
-        setsearch(event.target.value);
-        //setPage(1)
+        setCurrentSearch(event.target.value);
+        setCurrentPage(1)
     }
 
     function setCurrentPage(page:number) {
