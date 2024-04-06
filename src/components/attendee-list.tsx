@@ -29,20 +29,25 @@ export function AttendeeList() {
     const [totalAttendee, setTotalAttendee ] = useState(0);
 
     useEffect(()=>{
-        fetch(`http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees?pageIndex=${page-1}`)
+        const url = new URL('http://localhost:3333/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees')
+        url.searchParams.set('pageIndex', String(page-1))
+        url.searchParams.set('query', search)
+
+        fetch(url)
         .then(response => response.json())
         .then(data => {
            setAttendees(data.attendees);
            setTotalAttendee(data.total);
         })
-    },[page])
+    },[page, search])
 
     let totalPage = Math.ceil(totalAttendee/10);
 
     function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
         setsearch(event.target.value);
+        setPage(1)
     }
-    
+
     function goToNextPage() {page < totalPage && setPage(page+1)}
     function goToPreviousPage(){page > 1 && setPage(page-1)}
     function goToFirstPage(){setPage(1)}
@@ -55,7 +60,9 @@ export function AttendeeList() {
                 <h1 className="text-2xl font-bold">Participante</h1>
                 <div className="w-72 px-3 py-1.5 border border-white/10 rounded-lg text-sm flex items-center gap-3">
                     <Search className="size-4 text-emerald-300"/>
-                    <input value={search} onChange={onSearchInputChanged} className="bg-transparent flex-1 outline-none border-0 p-0 text-sm " type="text" placeholder="Buscar Participante..."  />
+                    <input value={search} onChange={onSearchInputChanged} 
+                        className="bg-transparent flex-1 outline-none border-0 p-0 text-sm focus:ring-0" 
+                        type="text" placeholder="Buscar Participante..."  />
                 </div>
 
             </div>
@@ -106,7 +113,7 @@ export function AttendeeList() {
                         </TableCell>
                         <TableCell className="text-right" colSpan={3}>
                             <div className="inline-flex items-center gap-8 ">
-                                <span>Página {page} de {totalPage}</span>  
+                                <span>Página {page} de {totalPage >= 1 ? totalPage : 1 }</span>  
                                 <div className="flex gap-1.5">
                                     <IconButton onClick={goToFirstPage} disabled={page === 1}><ChevronsLeft className="size-4"/></IconButton>
                                     <IconButton onClick={goToPreviousPage} disabled={page === 1}><ChevronLeft className="size-4"/></IconButton>
