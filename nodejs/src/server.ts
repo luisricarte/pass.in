@@ -38,8 +38,8 @@ app.post('/events', async (request,reply) => {
     //1.1 utilizado para garantir que seja aguardado o tempo necessário para finalizar a requisição
     //2 Async informa que dentro dessa função terá campos que demorarão para serem executados 
 
-    return `Evento criado com ID: ${event.id}`
-
+    //return 
+    return reply.status(201).send(`Evento criado com ID: ${event.id}`)
 })
 
 
