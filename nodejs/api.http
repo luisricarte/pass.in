@@ -2,7 +2,7 @@ POST http://localhost:8088/events
 Content-Type: application/json
 
 {
-    "title": "Teste Slug é!", 
+    "title": "Novo registro", 
     "details": "estou aprendendo a ser um programador!",
     "maximumAttendees": 12
 }
