@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import {z} from 'zod';
 import { PrismaClient } from '@prisma/client';
+import { generateSlug } from "./utils/generate-slug";
 
 const prisma = new PrismaClient({
     log: ['query'],
@@ -19,19 +20,34 @@ app.post('/events', async (request,reply) => {
         maximumAttendees: z.number().int().positive().nullable(),
     })
 
-    const data = createEventSchema.parse(request.body);
+    const {
+        title,
+        details,
+        maximumAttendees
+    } = createEventSchema.parse(request.body);
     // .parse(x)
     // utilizado para fazer a verificado dos dados a partir da
     // biblioteca zod definido acima e após a verificação guarda-os
     // dentro do data
 
+    const slug = generateSlug(title);
+
+    const eventWithSameSlug = await prisma.event.findUnique({
+        where: {
+            slug   
+        }
+    })
+
+    if (eventWithSameSlug !== null) {
+        throw new Error('This event title already exists!')
+    }
 
     const event = await prisma.event.create({
         data: {
-            title: data.title,
-            details: data.details,
-            maximumAttendees: data.maximumAttendees,
-            slug: new Date().toISOString(),
+            title,
+            details,
+            maximumAttendees,
+            slug,
         },
     })
     //1 ele retorna uma promise o async await deve ser 

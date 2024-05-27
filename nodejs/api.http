@@ -2,8 +2,7 @@ POST http://localhost:8088/events
 Content-Type: application/json
 
 {
-    "title": "Unite Summit", 
+    "title": "Teste Slug é!", 
     "details": "estou aprendendo a ser um programador!",
-    "slug": "testando!",
     "maximumAttendees": 12
 }
