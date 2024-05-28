@@ -6,3 +6,13 @@ Content-Type: application/json
     "details": "estou aprendendo a ser um programador!",
     "maximumAttendees": 12
 }
+
+### 
+
+POST http://localhost:8088/events/09885965-b620-469f-8030-af2631a0f9db/attendees
+Content-Type: application/json
+
+{
+    "name": "Luis Rcartee",
+    "email": "duds@email.com.br"
+}
