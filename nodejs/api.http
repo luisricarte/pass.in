@@ -21,3 +21,8 @@ Content-Type: application/json
 
 GET http://localhost:8088/event/8f749d84-2840-48e4-a22b-75d133453115
 Content-Type: application/json
+
+###
+
+GET http://localhost:8088/attendees/4/badge
+Content-Type: application/json
