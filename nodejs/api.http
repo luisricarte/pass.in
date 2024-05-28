@@ -2,17 +2,22 @@ POST http://localhost:8088/events
 Content-Type: application/json
 
 {
-    "title": "Novo registro", 
+    "title": "Registro com uma vaga", 
     "details": "estou aprendendo a ser um programador!",
-    "maximumAttendees": 12
+    "maximumAttendees": 1
 }
 
 ### 
 
-POST http://localhost:8088/events/09885965-b620-469f-8030-af2631a0f9db/attendees
+POST http://localhost:8088/events/8f749d84-2840-48e4-a22b-75d133453115/attendees
 Content-Type: application/json
 
 {
-    "name": "Luis Rcartee",
-    "email": "dudss@email.com.br"
+    "name": "Luis Rcarteee",
+    "email": "dudss1@email.com.br"
 }
+
+###
+
+GET http://localhost:8088/event/8f749d84-2840-48e4-a22b-75d133453115
+Content-Type: application/json

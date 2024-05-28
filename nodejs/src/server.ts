@@ -3,6 +3,7 @@ import {serializerCompiler, validatorCompiler, ZodTypeProvider} from "fastify-ty
 import {z} from 'zod';
 import { createEvent } from "./routes/create-event";
 import { registerForEvent } from "./routes/register-for-event";
+import { getEvent } from "./routes/get-event";
 
 const app = fastify();
 
@@ -11,6 +12,7 @@ app.setSerializerCompiler(serializerCompiler);
 
 app.register(createEvent);
 app.register(registerForEvent);
+app.register(getEvent);
 
 app.listen({ port: 8088}).then(()=>{
     console.log("HTTP server running")
