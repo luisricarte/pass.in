@@ -8,6 +8,8 @@ export async function registerForEvent(app: FastifyInstance) {
         .withTypeProvider<ZodTypeProvider>()
         .post('/events/:eventId/attendees', {
             schema: {
+                summary: 'cadastra um participante a um evento',
+                tags: ['attendee'],
                 body: z.object({
                     name: z.string(),
                     email: z.string().email(),

@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ### 
 
-POST http://localhost:8088/events/8f749d84-2840-48e4-a22b-75d133453115/attendees
+POST http://localhost:8088/events/09885965-b620-469f-8030-af2631a0f9db/attendees
 Content-Type: application/json
 
 {
@@ -19,17 +19,17 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8088/event/8f749d84-2840-48e4-a22b-75d133453115
+GET http://localhost:8088/event/09885965-b620-469f-8030-af2631a0f9db
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8088/attendees/4/badge
+GET http://localhost:8088/attendees/2/badge
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8088/attendees/3/check-in
+GET http://localhost:8088/attendees/5/check-in
 
 ###
 
