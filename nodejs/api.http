@@ -26,3 +26,11 @@ Content-Type: application/json
 
 GET http://localhost:8088/attendees/4/badge
 Content-Type: application/json
+
+###
+
+GET http://localhost:8088/attendees/3/check-in
+
+###
+
+GET http://localhost:8088/events/09885965-b620-469f-8030-af2631a0f9db/attendees
